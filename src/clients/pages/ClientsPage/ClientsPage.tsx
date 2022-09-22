@@ -7,12 +7,11 @@ import {
     useHistory,
 } from "react-router-dom";
 import { Page } from '../../../components';
-import { ClientsTable } from '../../containers/ClientsTable/ClientsTable';
-import { CreateClient } from 'clients';
+import { ClientsTable, CreateClient, EditClient } from '../../containers';
 
 export function ClientsPage() {
-    const { url, path }: match = useRouteMatch();
-    const { push } = useHistory();
+    const {url, path}: match = useRouteMatch();
+    const {push} = useHistory();
     const gotToCreateClient = () => push(`${url}/create`);
 
     return (
@@ -28,8 +27,8 @@ export function ClientsPage() {
                 </Page>
             </Route>
             <Route path={`${path}/:clientId/edit`}>
-                <Page title="Edit client" >
-                    Here will come the EditClient container
+                <Page title="Edit client">
+                    <EditClient></EditClient>
                 </Page>
             </Route>
         </Switch>
