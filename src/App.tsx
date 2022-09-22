@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Sidenav, SidenavContainer, SidenavContent, Header, NavItems } from './components';
-import { Switch, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import { Header, NavItems, Sidenav, SidenavContainer, SidenavContent } from './components';
 import { Routes } from './routes';
 
 const navItems = [{
@@ -15,7 +15,7 @@ export function App() {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
     return (
         <div className="w-full h-full flex flex-col">
-            <Header title='Jworks base app' handleClickMenuButton={() => setIsSidebarOpen(!isSidebarOpen)}/>
+            <Header title='My Awesome React App' handleClickMenuButton={() => setIsSidebarOpen(!isSidebarOpen)} />
             <div className="flex flex-1 flex-auto">
             <SidenavContainer>
                 <Sidenav isSidenavOpen={isSidebarOpen}>
