@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { Page } from '../../../components';
 import { ClientsTable } from '../../containers/ClientsTable/ClientsTable';
+import { CreateClient } from 'clients';
 
 export function ClientsPage() {
     const { url, path }: match = useRouteMatch();
@@ -23,11 +24,11 @@ export function ClientsPage() {
             </Route>
             <Route path={`${path}/create`}>
                 <Page title="Create client">
-                    Here will come the CreateClient container
+                    <CreateClient></CreateClient>
                 </Page>
             </Route>
             <Route path={`${path}/:clientId/edit`}>
-                <Page title="Edit client">
+                <Page title="Edit client" >
                     Here will come the EditClient container
                 </Page>
             </Route>
