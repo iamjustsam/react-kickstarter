@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Header, NavItems, Sidenav, SidenavContainer, SidenavContent } from './components';
-import { Routes } from './routes';
+import { Routes as AppRoutes } from './routes';
 
 const navItems = [{
     name: 'products',
-    route: Routes.PRODUCTS
+    route: AppRoutes.PRODUCTS
 }, {
     name: 'clients',
-    route: Routes.CLIENTS
+    route: AppRoutes.CLIENTS
 }];
 
 export function App() {
@@ -22,14 +22,14 @@ export function App() {
                     <NavItems navItems={navItems}/>
                 </Sidenav>
                 <SidenavContent>
-                    <Switch>
-                        <Route path={Routes.PRODUCTS}>
+                    <Routes>
+                        <Route path={AppRoutes.PRODUCTS}>
                             Here comes the products page
                         </Route>
-                        <Route path={Routes.CLIENTS}>
+                        <Route path={AppRoutes.CLIENTS}>
                             Here comes the clients page
                         </Route>
-                    </Switch>
+                    </Routes>
                 </SidenavContent>
             </SidenavContainer>
             </div>
