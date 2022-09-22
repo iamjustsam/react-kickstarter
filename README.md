@@ -1,0 +1,1 @@
+To start the exercise, checkout branch ch00 and follow along with the ch00.md. When we move on to the next chapter, you can keep working from your solution, or if you'd like to catch up you can checkout the next chapter branch as a new starting point.
