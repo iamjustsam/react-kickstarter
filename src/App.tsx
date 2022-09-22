@@ -5,7 +5,7 @@ export function App() {
     return (
         <div className="w-full h-full">
             <Header
-                title="Hello, jworks!"
+                title="Hello, NCore!"
                 handleClickMenuButton={() => console.log('the menu button was clicked')}
             ></Header>
         </div>
