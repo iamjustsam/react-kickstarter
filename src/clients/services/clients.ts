@@ -1,6 +1,6 @@
 import { Client } from "../models";
 
-const apiUrl = "https://base-app-backend.herokuapp.com/clients";
+const apiUrl = "https://react-training-app.azurewebsites.net/clients";
 
 export const getClient = async (id: string): Promise<Client> =>
     (await fetch(`${apiUrl}/${id}`)).json();

@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import './assets/tailwind.generated.css'
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './assets/tailwind.generated.css';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+  );
+  root.render(
     <React.StrictMode>
         <BrowserRouter>
             <App/>
         </BrowserRouter>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
