@@ -1,6 +1,7 @@
-import React, { ReactNode, Children } from "react";
-import { Menu, MenuList, MenuLink, MenuButton } from "@reach/menu-button";
-import "@reach/menu-button/styles.css";
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import React, { Children, ReactNode } from "react";
 import "./ActionButtonMenu.css";
 
 interface Props {
@@ -8,16 +9,36 @@ interface Props {
 }
 
 export function ActionButtonMenu({ children }: Props) {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
-    <Menu>
-      <MenuButton>
-        Actions <span aria-hidden>▾</span>
-      </MenuButton>
-      <MenuList className="action-button-menu">
+    <div>
+      <Button
+        id="action-button"
+        aria-controls={open ? 'action-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}>Actions <span aria-hidden>▾</span>
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
         {Children.map(children, (child) => (
-          <MenuLink className="action-button-menu__link">{child}</MenuLink>
+          <MenuItem onClick={handleClose}>{child}</MenuItem>
         ))}
-      </MenuList>
-    </Menu>
+      </Menu>
+    </div>
   );
 }

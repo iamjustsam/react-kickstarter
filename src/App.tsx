@@ -1,6 +1,6 @@
+import { ClientsPage } from 'clients';
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { ClientsPage } from './clients';
 import { Header, NavItems, Sidenav, SidenavContainer, SidenavContent } from './components';
 import { Routes as AppRoutes } from './routes';
 
@@ -18,21 +18,19 @@ export function App() {
         <div className="w-full h-full flex flex-col">
             <Header title='My Awesome React App' handleClickMenuButton={() => setIsSidebarOpen(!isSidebarOpen)} />
             <div className="flex flex-1 flex-auto">
-                <SidenavContainer>
-                    <Sidenav isSidenavOpen={isSidebarOpen}>
-                        <NavItems navItems={navItems}/>
-                    </Sidenav>
-                    <SidenavContent>
-                        <Routes>
-                            <Route path={Routes.PRODUCTS}>
-                                Here comes the products page
-                            </Route>
-                            <Route path={Routes.CLIENTS}>
-                                <ClientsPage/>
-                            </Route>
-                        </Routes>
-                    </SidenavContent>
-                </SidenavContainer>
+            <SidenavContainer>
+                <Sidenav isSidenavOpen={isSidebarOpen}>
+                    <NavItems navItems={navItems}/>
+                </Sidenav>
+                <SidenavContent>
+                    <Routes>
+                        <Route path={AppRoutes.PRODUCTS}>
+                            Here comes the products page
+                        </Route>
+                        <Route path={AppRoutes.CLIENTS} element={<ClientsPage />} />
+                    </Routes>
+                </SidenavContent>
+            </SidenavContainer>
             </div>
         </div>
     );
