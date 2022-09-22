@@ -1,5 +1,6 @@
-export * from "./containers";
 export * from "./components";
-export * from "./model";
-export * from "./services";
+export * from "./containers";
+export * from "./models";
 export * from "./pages";
+export * from "./services";
+
