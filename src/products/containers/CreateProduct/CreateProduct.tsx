@@ -1,14 +1,14 @@
+import { createProduct, Product, ProductForm } from "products";
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { ProductForm, createProduct, Product } from "products";
+import { useNavigate } from "react-router-dom";
 
 export function CreateProduct() {
-    const {push} = useHistory();
-    const goBackToProducts = () => push("/products");
-    const onCreateProduct = async (newProduct: Partial<Product>) => {
-        await createProduct(newProduct);
-        goBackToProducts();
-    };
+  const navigate = useNavigate();
+  const goBackToProducts = () => navigate("/products");
+  const onCreateProduct = async (newProduct: Partial<Product>) => {
+    await createProduct(newProduct);
+    goBackToProducts();
+  };
 
     return (
         <ProductForm

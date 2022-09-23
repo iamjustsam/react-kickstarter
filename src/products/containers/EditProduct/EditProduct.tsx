@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { match, useRouteMatch, useHistory } from "react-router-dom";
-import { Product, getProduct, editProduct, ProductForm } from "products";
+import { editProduct, getProduct, Product, ProductForm } from "products";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function EditProduct() {
-    const {
-        params: {productId},
-    }: match<{ productId: string }> = useRouteMatch();
-    const {push} = useHistory();
+    const { productId } = useParams();
+    const navigate = useNavigate();
     const [product, setProduct] = useState<Product | undefined>(undefined);
-    const goBackToProducts = () => push("/products");
+    const goBackToProducts = () => navigate("/products");
     const onEditProduct = async (productFields: Partial<Product>) => {
         await editProduct({...product!, ...productFields});
         goBackToProducts();
     };
     const retrieveProduct = async () => {
-        const result = await getProduct(productId);
+        const result = await getProduct(productId ?? '');
         setProduct(result);
     };
 

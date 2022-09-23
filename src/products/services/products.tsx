@@ -1,6 +1,6 @@
 import { Product } from "products/models";
 
-const apiUrl = "https://base-app-backend.herokuapp.com/products";
+const apiUrl = "https://react-training-app.azurewebsites.net/products";
 
 export const getProduct = async (id: string): Promise<Product> =>
     (await fetch(`${apiUrl}/${id}`)).json();

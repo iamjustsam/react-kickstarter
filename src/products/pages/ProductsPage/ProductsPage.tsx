@@ -1,39 +1,26 @@
+import { Page } from "components";
+import { Dialog } from 'components/Dialog/Dialog';
+import { ProductsTable } from "products";
+import { CreateProduct, EditProduct } from "products/containers";
 import React from "react";
 import {
-    Switch,
-    Route,
-    useRouteMatch,
-    match,
-    useHistory,
+  Route, Routes, useNavigate
 } from "react-router-dom";
-import { Page } from "components";
-import { ProductsTable } from "products";
-import { EditProduct, CreateProduct } from "products/containers";
-import { Dialog } from '../../../components/Dialog/Dialog';
 
 export function ProductsPage() {
-    const {url}: match = useRouteMatch();
-    const {push} = useHistory();
+  const navigate = useNavigate();
 
-    const goToCreateProduct = () => push(`${url}/create`);
+  const goToCreateProduct = () => navigate('./create');
 
-
-    return (
-        <>
-            <Page title="Products" onCreateButtonClick={goToCreateProduct}>
-                <ProductsTable></ProductsTable>
-            </Page>
-            <Switch>
-                <Route path={`${url}/create`}>
-                    <Dialog show={true} title={'Create product'}
-                            onClose={() => push(url)}><CreateProduct></CreateProduct></Dialog>
-                </Route>
-                <Route path={`${url}/:productId/edit`}>
-                    <Dialog show={true} title={'Edit product'}
-                            onClose={() => push(url)}><EditProduct></EditProduct></Dialog>
-                </Route>
-            </Switch>
-        </>
-    );
+  return (
+      <Routes>
+        <Route path="/" element={<Page title="Products" onCreateButtonClick={goToCreateProduct}>
+            <ProductsTable></ProductsTable>
+          </Page>} />
+        <Route path='/create' element={<Dialog show={true} title={'Create product'}
+        onClose={() => navigate('./')}><CreateProduct></CreateProduct></Dialog>} />
+        <Route path='/:productId/edit' element={<Dialog show={true} title={'Edit product'}
+        onClose={() => navigate('./')}><EditProduct></EditProduct></Dialog>} />
+      </Routes>
+  );
 }
-

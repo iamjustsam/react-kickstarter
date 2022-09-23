@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { match, useRouteMatch, useHistory, useLocation } from "react-router-dom";
-import { Product, getProducts, deleteProduct } from "products";
 import { Table } from "components";
+import { deleteProduct, getProducts, Product } from "products";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function ProductsTable() {
-    const [products, setProducts] = useState<Product[] | undefined>(undefined);
-    const {url}: match = useRouteMatch();
-    const location = useLocation();
-    const history = useHistory();
+  const navigate = useNavigate();
+  const [products, setProducts] = useState<Product[] | undefined>(undefined);
+  const location = useLocation();
 
-    useEffect(() => history.listen(() => retrieveProducts()), []);
+  useEffect(() => {
+    retrieveProducts();
+  }, [location]);
 
     const retrieveProducts = async () => {
         const result = await getProducts();
@@ -23,18 +24,12 @@ export function ProductsTable() {
         }
     };
 
-    useEffect(() => {
-        retrieveProducts();
-    }, [history]);
-
-    return (
-        <Table
-            headers={["Id", "Name", "Description", "Product Code"]}
-            data={products}
-            onEdit={(productid) => {
-                history.push(`${url}/${productid}/edit`, {background: location})
-            }}
-            onDelete={onDeleteProduct}
-        ></Table>
-    );
+  return (
+    <Table
+      headers={["Id", "Name", "Description", "Product Code"]}
+      data={products}
+      onEdit={(productId) => navigate(`./${productId}/edit`, { state: {background: location} })}
+      onDelete={onDeleteProduct}
+    ></Table>
+  );
 }
