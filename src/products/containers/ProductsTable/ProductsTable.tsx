@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { match, useRouteMatch, useHistory } from "react-router-dom";
-import { Product, getProducts, deleteProduct } from "products";
 import { Table } from "components";
+import { deleteProduct, getProducts, Product } from "products";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function ProductsTable() {
-  const { url }: match = useRouteMatch();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[] | undefined>(undefined);
 
   const retrieveProducts = async () => {
@@ -28,7 +27,7 @@ export function ProductsTable() {
     <Table
       headers={["Id", "Name", "Description", "Product Code"]}
       data={products}
-      onEdit={(productId) => push(`${url}/${productId}/edit`)}
+      onEdit={(productId) => navigate(`./${productId}/edit`)}
       onDelete={onDeleteProduct}
     ></Table>
   );

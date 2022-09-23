@@ -1,38 +1,27 @@
-import React from "react";
-import {
-  Switch,
-  Route,
-  useRouteMatch,
-  match,
-  useHistory,
-} from "react-router-dom";
 import { Page } from "components";
 import { ProductsTable } from "products";
-import { EditProduct, CreateProduct } from "products/containers";
+import { CreateProduct, EditProduct } from "products/containers";
+import React from "react";
+import {
+  Route, Routes, useNavigate
+} from "react-router-dom";
 
 export function ProductsPage() {
-  const { url, path }: match = useRouteMatch();
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
-  const goToCreateProduct = () => push(`${url}/create`);
+  const goToCreateProduct = () => navigate('./create');
 
   return (
-      <Switch>
-        <Route exact path={path}>
-          <Page title="Products" onCreateButtonClick={goToCreateProduct}>
+      <Routes>
+        <Route path="/" element={<Page title="Products" onCreateButtonClick={goToCreateProduct}>
             <ProductsTable></ProductsTable>
-          </Page>
-        </Route>
-        <Route path={`${path}/create`}>
-          <Page title="Create product">
+          </Page>} />
+        <Route path='/create' element={<Page title="Create product">
             <CreateProduct></CreateProduct>
-          </Page>
-        </Route>
-        <Route path={`${path}/:productId/edit`}>
-          <Page title="Edit product">
+          </Page>} />
+        <Route path='/:productId/edit' element={<Page title="Edit product">
             <EditProduct></EditProduct>
-          </Page>
-        </Route>
-      </Switch>
+          </Page>} />
+      </Routes>
   );
 }
